@@ -1,0 +1,12 @@
+.NavLink{
+  color: white;
+  text-decoration: none;
+}
+.App{
+  background-color: black;
+  height: 100vh;
+}
+.temp-title{
+  color: white;
+  text-align: center;
+}
