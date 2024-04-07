@@ -1,3 +1,7 @@
+![image](https://github.com/HSLE24/netflix-demo/assets/4832903/bbd773e2-2b9a-4e56-bfb5-2de90e83a6f3)
+![image](https://github.com/HSLE24/netflix-demo/assets/4832903/3c230734-a971-4a82-9548-6e22fb2a6ccb)
+![image](https://github.com/HSLE24/netflix-demo/assets/4832903/5379c490-70dc-4a57-b58c-e0c4ec3856f1)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
