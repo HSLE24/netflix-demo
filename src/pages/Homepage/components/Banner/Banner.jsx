@@ -12,9 +12,11 @@ const Banner = () => {
 
     if (isLoading){
         return (
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
+            <div className="spinner">
+                <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>
           );
     }
     if (isError){
@@ -42,7 +44,7 @@ const Banner = () => {
         </div>
         <Carousel.Caption>
           <h1>{data?.results[0].title}</h1>
-          <p>{data?.results[0].overview}</p>
+          <p className="overview">{data?.results[0].overview}</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -55,7 +57,7 @@ const Banner = () => {
         </div>
         <Carousel.Caption>
           <h1>{data?.results[1].title}</h1>
-          <p>{data?.results[1].overview}</p>
+          <p className="overview">{data?.results[1].overview}</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -68,7 +70,7 @@ const Banner = () => {
         </div>
         <Carousel.Caption>
           <h1>{data?.results[2].title}</h1>
-          <p>{data?.results[2].overview}</p>
+          <p className="overview">{data?.results[2].overview}</p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

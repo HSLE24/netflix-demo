@@ -8,7 +8,23 @@ body{
   text-decoration: none;
   margin-left: 1em;
 }
+.NavLink:hover{
+  color: red;
+}
+.active{
+  font-weight: bold;
+  color:red;
+}
+
 .temp-title{
   color: white;
   text-align: center;
+}
+
+.spinner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
 }

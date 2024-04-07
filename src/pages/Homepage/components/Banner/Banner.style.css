@@ -12,3 +12,9 @@
     height: 100%;
     background: linear-gradient(to top, black, transparent);
 }
+
+@media only screen and (max-width: 767px) {
+    .overview {
+      display: none;
+    }
+  }
