@@ -22,6 +22,68 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const MoviePage = () => {
 
+  const MobileReactPaginate = () => (
+    <ReactPaginate
+      nextLabel="next >"
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={1}
+      marginPagesDisplayed={1}
+      pageCount={data?.total_pages}
+      previousLabel="< prev"
+      pageClassName="page-item"
+      pageLinkClassName="page-link"
+      previousClassName="page-item"
+      previousLinkClassName="page-link"
+      nextClassName="page-item"
+      nextLinkClassName="page-link"
+      breakLabel="..."
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      containerClassName="pagination"
+      activeClassName="active"
+      renderOnZeroPageCount={null}
+      forcePage={page - 1}
+    />
+  );
+  
+  const PcReactPaginate = () => (
+    <ReactPaginate
+      nextLabel="next >"
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={3}
+      marginPagesDisplayed={2}
+      pageCount={data?.total_pages}
+      previousLabel="< prev"
+      pageClassName="page-item"
+      pageLinkClassName="page-link"
+      previousClassName="page-item"
+      previousLinkClassName="page-link"
+      nextClassName="page-item"
+      nextLinkClassName="page-link"
+      breakLabel="..."
+      breakClassName="page-item"
+      breakLinkClassName="page-link"
+      containerClassName="pagination"
+      activeClassName="active"
+      renderOnZeroPageCount={null}
+      forcePage={page - 1}
+    />
+  );
+  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const[query, setQuery] = useSearchParams()
   const keyword = query.get("q")
 
@@ -31,7 +93,7 @@ const MoviePage = () => {
 
   let genre = useSelector((state)=>state.genreId)
   let sort = useSelector((state)=>state.sort)
-  
+
   useEffect(() => {
     dispatch({ type: 'SELECT-FILTER', payload: { sort: null, genreId: null } });
   }, []); // 페이지 로드시에만 실행
@@ -82,34 +144,17 @@ const MoviePage = () => {
           return 0;
         })
         .map((movie, index)=>(
-          <Col key={index} lg={3} xs={6}>
+          <Col key={index} lg={3} md={4} sm={6} xs={12} className="img-center">
             <MovieCard movie={movie}></MovieCard>
-            <div className="spacer"></div>
           </Col>
         ))}
       </Row>
       <div className="pagination-area">
-        <ReactPaginate
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          pageCount={data?.total_pages}
-          previousLabel="< prev"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-          forcePage={page - 1}
-        />
+        {isMobile ? (
+          <MobileReactPaginate/>
+        ) : (
+          <PcReactPaginate/>
+        )}
       </div>
     </Container>
   )

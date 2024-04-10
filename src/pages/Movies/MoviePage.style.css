@@ -33,10 +33,13 @@
     background-color: red;
 }
 .pagination-area{
+    margin-top: 3em;
+    margin-bottom: 2em;
     display:flex;
     justify-content: center;
 }
 
-.dropdown{
-    display: flex;
+.img-center{
+    display:flex;
+    justify-content: center;
 }
