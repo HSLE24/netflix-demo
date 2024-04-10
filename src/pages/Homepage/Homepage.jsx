@@ -16,6 +16,7 @@ const Homepage = () => {
       <PopularMovieSlide/>
       <TopRatedMovieSlide/>
       <UpcomingMovieSlide/>
+      <div className='spacer'></div>
     </div>
   )
 }
