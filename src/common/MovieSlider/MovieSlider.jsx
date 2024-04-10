@@ -2,7 +2,7 @@ import React from 'react';
 import "./MovieSlider.style.css";
 import Carousel from 'react-multi-carousel';
 import Container from 'react-bootstrap/Container';
-import MovieCard from '../MovieCard/MovieCard';
+import MovieCardSlider from '../MovieCard/MovieCardSlider';
 import 'react-multi-carousel/lib/styles.css';
 import { useState, useEffect } from 'react';
 
@@ -34,7 +34,7 @@ const MovieSlider = ({title, movies, responsive}) => {
                 partialVisible={false}
                 centerMode={!isMobile}
             >
-            {movies.map((movie, index)=><MovieCard movie={movie} key={index}/>)}
+            {movies.map((movie, index)=><MovieCardSlider movie={movie} key={index}/>)}
         </Carousel>
     </Container>
   )
