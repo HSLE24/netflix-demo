@@ -1,0 +1,43 @@
+.detail-banner{
+    height: 56vh;
+    background-position: center middle;
+    background-repeat: no-repeat;
+    background-image: cover;
+    background-size: 100% auto; /* 가로 방향으로 꽉 차게 설정 */
+    position: relative; /* 부모 요소로 설정 */
+}
+
+.detail-banner:before{
+    content:'';
+    background: linear-gradient(to top, black, transparent);
+    position:absolute;
+    left: 0;
+    height: 56vh;
+    width: 100%;
+}
+
+.detail-banner-text-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 40%;
+    padding: 2rem;
+}
+
+.detail-banner-text-area > *{
+    z-index: 2;
+}
+
+.video-center{
+    display: flex;
+    justify-content: center;
+}
+.video-text{
+    color: black;
+    cursor:pointer;
+}
+.video-text:hover{
+    color: red;
+    text-decoration: underline;
+}
