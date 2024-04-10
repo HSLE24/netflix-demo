@@ -8,7 +8,6 @@ import Carousel from 'react-bootstrap/Carousel';
 const Banner = () => {
 
     const { data, isLoading, isError, error } = usePopularMoviesQuery()
-    console.log("dddd", data);
 
     if (isLoading){
         return (

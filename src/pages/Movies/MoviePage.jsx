@@ -7,8 +7,9 @@ import Alert from 'react-bootstrap/Alert';
 import { Container, Row, Col } from 'react-bootstrap';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import ReactPaginate from 'react-paginate';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilterComp from './components/FilterComp';
+import { useSelector, useDispatch } from 'react-redux';
 
 //경로 2가지
 //nav바에서 클릭해서 온 경우 => popular movie 보여주기
@@ -26,11 +27,22 @@ const MoviePage = () => {
 
   const [page, setPage] = useState(1);
 
+  const dispatch = useDispatch();
+
+  let genre = useSelector((state)=>state.genreId)
+  let sort = useSelector((state)=>state.sort)
+  
+  useEffect(() => {
+    dispatch({ type: 'SELECT-FILTER', payload: { sort: null, genreId: null } });
+  }, []); // 페이지 로드시에만 실행
+
   const handlePageClick=({selected})=>{
     setPage(selected + 1);
+    dispatch({type: 'SELECT-FILTER', payload: {sort: null, genreId: null}})
   }
 
   const {data, isLoading, isError, error} = useSearchMovieQuery({keyword, page});
+
   if (isLoading){
     return (
           <div className="spinner">
@@ -43,8 +55,14 @@ const MoviePage = () => {
   if (isError){
       return <Alert variant='danger'>{ error.message }</Alert>
   }
+  
+  const filterMoviesByGenre = (movies, genreId) => {
+    if (genreId === null) {
+      return movies; // 필터링할 장르가 없으면 모든 영화를 반환
+    }
+    return movies.filter(movie => movie.genre_ids.includes(genreId));
+  };
 
-  console.log("useSearchMovieQuery ", data);
   return (
     <Container>
       <div className="spacer"></div>
@@ -53,7 +71,17 @@ const MoviePage = () => {
       </Row>
       <div className="spacer"></div>
       <Row>
-        {data?.results.map((movie, index)=>(
+        {filterMoviesByGenre(data?.results, genre)
+        .sort((a, b) => {
+          if (sort === "most"){
+            return b.popularity - a.popularity;
+          }
+          else if (sort === "least"){
+            return a.popularity - b.popularity;
+          }
+          return 0;
+        })
+        .map((movie, index)=>(
           <Col key={index} lg={3} xs={6}>
             <MovieCard movie={movie}></MovieCard>
             <div className="spacer"></div>
