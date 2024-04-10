@@ -6,7 +6,7 @@ import { faBan, faChildren, faCheckToSlot, faTrophy } from '@fortawesome/free-so
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
 import { useNavigate } from 'react-router-dom';
 
-const MovieCard = ({movie}) => {
+const MovieCardSlider = ({movie}) => {
 
     const navigate = useNavigate();
 
@@ -28,23 +28,23 @@ const MovieCard = ({movie}) => {
   return (
     <div
     style={{backgroundImage:"url(" + `https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}` + ")"}} 
-    className="movie-card"
+    className="movie-card-slider"
     onClick={handleMovieClick}
     >
-        <div className="overlay">
-            <div className="card-container">
-                <h4 className="movie-title">{movie.title}</h4>
+        <div className="overlay-slider">
+            <div className="card-container-slider">
+                <h4 className="movie-title-slider">{movie.title}</h4>
                 {showGenre(movie.genre_ids).map((id)=>(
                     <Badge key={id} pill bg="danger">
                         {id}
                     </Badge>
                 ))}
             </div>
-            <div className="card-container">
+            <div className="card-container-slider">
                 <div><FontAwesomeIcon icon={faCheckToSlot} /> {movie.vote_average}</div>
                 <div><FontAwesomeIcon icon={faTrophy} /> {movie.popularity}</div>
                 <div>{movie.adult?(
-                        <span className="ban"><FontAwesomeIcon icon={faBan} /> over 18</span>
+                        <span className="ban-slider"><FontAwesomeIcon icon={faBan} /> over 18</span>
                     ) : (
                         <span><FontAwesomeIcon icon={faChildren} /> under 18</span>
                     )}</div>
@@ -54,4 +54,4 @@ const MovieCard = ({movie}) => {
   )
 }
 
-export default MovieCard
+export default MovieCardSlider
