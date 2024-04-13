@@ -33,12 +33,14 @@ const MovieDetailPage = () => {
   
   return (
     <div>
-      <DetailBanner backdrop_path={data.backdrop_path} title={data.title} overview={data.overview} id={params.id}/>
-      <div className='spacer'></div>
+      <DetailBanner backdrop_path={data?.backdrop_path} title={data?.title} overview={data?.overview} id={params?.id}/>
+      <div className='detail-spacer'></div>
       <MovieDetail movie={data}/>
-      <div className='spacer'></div>
-      <MovieSlider title="Related Movies" movies={relatedData.results} responsive={responsive}/>
-      <div className='spacer'></div>
+      <div className='detail-spacer'></div>
+      {relatedData && relatedData.results.length != 0 && 
+        (<MovieSlider title="Related Movies" movies={relatedData?.results} responsive={responsive}/>)
+      }
+      <div className='detail-spacer'></div>
       <MovieReviews id={params.id}/>
       <div className='spacer'></div>
     </div>

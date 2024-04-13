@@ -1,0 +1,35 @@
+.text-box {
+  max-height: calc(1.5em * 5); /* 5줄 이상일 때 높이 제한 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 5줄까지만 표시 */
+  -webkit-box-orient: vertical;
+  transition: max-height 0.3s;
+  color: white;
+}
+
+.expanded {
+  max-height: none; /* 확장될 때 제한 해제 */
+  overflow: hidden;
+  display: -webkit-box;
+  transition: max-height 0.3s;
+  color: white;
+}
+
+.text-title{
+    color: white;
+}
+
+.more-btn{
+    text-decoration: underline;
+    border: none;
+    color: white;
+}
+
+.review-title{
+    padding-bottom: 1em;
+}
+
+.red-icon{
+    color: red;
+}

@@ -5,3 +5,9 @@
 .section-title{
     margin-top: 2em;
 }
+@media (max-width: 464px) {
+    .carousel-container {
+        overflow: hidden;
+        height: 300px;
+    }
+}

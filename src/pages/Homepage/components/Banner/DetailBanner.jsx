@@ -29,16 +29,18 @@ const DetailBanner = ({backdrop_path, title, overview, id}) => {
     className="detail-banner">
         <div className="text-white detail-banner-text-area">
             <h1>{title}</h1>
-            <p>{overview}</p>
-            {data && (
+            <p className="overview-text">{overview}</p>
+            {data && data.results.length != 0 && (
                 <Button variant="danger" onClick={handleShow}>
-                    Launch demo modal
+                    재생
                 </Button>
             )}
+            {data && data.results.length != 0 && (
             <Modal 
                 size="lg" 
                 show={show} 
                 onHide={handleClose}
+                 
                 >
                 <Modal.Header closeButton>
                 </Modal.Header>
@@ -46,12 +48,10 @@ const DetailBanner = ({backdrop_path, title, overview, id}) => {
                     <VideoPlayer videoId={data?.results[selectedId].key} />
                 </Modal.Body>
                 <Modal.Footer>
-                <p className="video-text" onClick={nextVideo}>next video: {data?.results[(selectedId + 1) % data.results.length].name}</p>
-                <Button variant="danger" onClick={handleClose}>
-                    Close
-                </Button>
+                <p className="video-text" onClick={nextVideo}>next!! {data?.results[(selectedId + 1) % data.results.length].name}</p>
                 </Modal.Footer>
             </Modal>
+            )}
         </div>
     </div>
   )

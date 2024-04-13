@@ -28,13 +28,12 @@ const MovieSlider = ({title, movies, responsive}) => {
         <Carousel
                 responsive={responsive}
                 autoPlay={true}
-                swipeable={true}
-                draggable={true}
+                itemClass="movie-slider p-1"
+                containerClass="carousel-container"
                 infinite={true}
-                partialVisible={false}
                 centerMode={!isMobile}
             >
-            {movies.map((movie, index)=><MovieCardSlider movie={movie} key={index}/>)}
+            {movies?.map((movie, index)=><MovieCardSlider movie={movie} key={index}/>)}
         </Carousel>
     </Container>
   )

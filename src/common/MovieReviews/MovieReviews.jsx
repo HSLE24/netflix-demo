@@ -5,38 +5,22 @@ import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 const MovieReviews = ({id}) => {
 
-    const [expandedReviews, setExpandedReviews] = useState([]);
+    const [expanded, setExpanded] = useState([]);
 
     const toggleExpand = (index) => {
-        const newExpandedReviews = [...expandedReviews];
-        newExpandedReviews[index] = !newExpandedReviews[index];
-        setExpandedReviews(newExpandedReviews);
-    };
-
-    const renderContent = (content, index) => {
-        if (expandedReviews[index] || content.split('\n').length <= 3) {
-            return (
-                <>
-                    <Card.Text>{content}</Card.Text>    
-                </>
-            );
-        } 
-        else {
-            return (
-                <>
-                    <Card.Text>{content.split('\n').slice(0, 3).join('\n')}</Card.Text>
-                    <a onClick={() => toggleExpand(index)}>더 보기</a>
-                </>
-            );
-        }
+      const newExpanded = [...expanded];
+      newExpanded[index] = !newExpanded[index];
+      setExpanded(newExpanded);
     };
 
     const {data, isLoading, isError, error} = useMovieReviewsQuery({id});
     console.log("MovieReviews ", data)
-  
+    
   if (isLoading){
     return (
           <div className="spinner">
@@ -51,14 +35,23 @@ const MovieReviews = ({id}) => {
   }
 
   return (
-    <div>
-        <h3>Reviews</h3>
+    <div className="container">
+        {data.results.length != 0 &&
+            (<h3 className="review-title">Reviews</h3>)
+        }
         {data?.results.map((movie, index)=>(
             <div>
-                <Card key={index} border="danger">
+                <Card bg="dark" key={index} border="danger">
                     <Card.Body>
-                    <Card.Title>{movie.author}</Card.Title>
-                    {renderContent(movie.content, index)}
+                        <h4 className="text-title">{movie.author} {movie.content.toLowerCase().includes("spoiler") ? <FontAwesomeIcon className="red-icon" icon={faCircleExclamation} /> : ""} </h4>
+                        <Card.Text className={`${expanded[index] ? 'expanded' : 'text-box'}`}>
+                            {movie.content}
+                        </Card.Text>
+                        {movie.content.split('\n').length > 5 && (
+                            <button className="bg-dark more-btn" onClick={() => toggleExpand(index)}>
+                            {expanded[index] ? '접기' : '더 보기'}
+                            </button>
+                        )}
                     </Card.Body>
                 </Card>
                 <br />

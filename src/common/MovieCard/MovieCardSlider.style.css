@@ -3,7 +3,7 @@
     height: 330px;
     background-size: cover;
     cursor: pointer;
-    transition: 0.5s
+    transition: 0.5s;
 }
 .overlay-slider{
     width: 100%;

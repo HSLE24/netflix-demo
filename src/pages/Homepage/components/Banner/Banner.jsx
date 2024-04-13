@@ -4,8 +4,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './Banner.style.css'
 import Carousel from 'react-bootstrap/Carousel';
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
+
+    const navigate = useNavigate();
 
     const { data, isLoading, isError, error } = usePopularMoviesQuery()
 
@@ -22,6 +25,10 @@ const Banner = () => {
         return <Alert variant='danger'>{ error.message }</Alert>
     }
 
+    const handleMovieClick = (id) => {
+        navigate(`/movies/${id}`);
+    };
+
   return (
     // <div style={{
     //     backgroundImage:"url(" + `https://www.themoviedb.org/t/p/w1066_and_h600_bestv2${data.results[2].backdrop_path}` + ")"
@@ -33,7 +40,7 @@ const Banner = () => {
     //     </div>
     // </div>
     <Carousel>
-      <Carousel.Item>
+      <Carousel.Item onClick={()=>{handleMovieClick(data.results[0].id)}}>
         <div className="gradient-overlay">
             <img
                 className="d-block w-100"
@@ -46,7 +53,7 @@ const Banner = () => {
           <p className="overview">{data?.results[0].overview}</p>
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
+      <Carousel.Item onClick={()=>{handleMovieClick(data.results[1].id)}}>
         <div className="gradient-overlay">
             <img
                 className="d-block w-100"
@@ -59,7 +66,7 @@ const Banner = () => {
           <p className="overview">{data?.results[1].overview}</p>
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
+      <Carousel.Item onClick={()=>{handleMovieClick(data.results[2].id)}}>
         <div className="gradient-overlay">
             <img
                 className="d-block w-100"

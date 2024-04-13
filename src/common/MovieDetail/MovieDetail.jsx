@@ -24,16 +24,12 @@ const MovieDetail = ({movie}) => {
 
   return (
     <Container>
-        <Row className="detail-container">
-            <Col lg={3} xs={12}>
-                <img className="detail-img" src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.backdrop_path}`}></img>
+        <Row>
+            <Col className="d-flex justify-content-center mt-5 col-lg-6 col-12">
+                <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}></img>
             </Col>
-            <Col lg={9} xs={12}>
-                <div>
-                    <h4>{movie.title}</h4>
-                    <p></p>
-                </div>
-                <div>
+            <Col className="mt-5 col-lg-6 col-12">
+                <div className="d-flex mb-4">
                     {showGenre(movie.genres).map((genre)=>(
                         <Badge key={genre} pill bg="danger">
                             {genre}
@@ -41,13 +37,25 @@ const MovieDetail = ({movie}) => {
                     ))}
                 </div>
                 <div>
-                    <div><FontAwesomeIcon icon={faCheckToSlot} /> {movie.vote_average}</div>
-                    <div><FontAwesomeIcon icon={faTrophy} /> {movie.popularity}</div>
-                    <div>{movie.adult?(
-                            <span className="ban"><FontAwesomeIcon icon={faBan} /> over 18</span>
+                    <h1>{movie.title}</h1>
+                    <h3>{movie.tagline}</h3>
+                </div>
+                <div className="py-4 border-bottom border-white">
+                    <div><FontAwesomeIcon className="icon-color" icon={faCheckToSlot} /> {movie.vote_average}  <FontAwesomeIcon className="icon-color"  icon={faTrophy} /> {movie.popularity} {movie.adult?(
+                            <span className="ban"><FontAwesomeIcon className="icon-color"  icon={faBan} /> over 18</span>
                         ) : (
-                            <span><FontAwesomeIcon icon={faChildren} /> under 18</span>
+                            <span><FontAwesomeIcon className="icon-color"  icon={faChildren} /> under 18</span>
                         )}</div>
+                </div>
+                <div className="py-4 border-bottom border-white">
+                    <p className="overview-text">{movie.overview}</p>
+                </div>
+                <div className="py-4">
+                    <div><Badge pill bg="danger">
+                        budget</Badge> $ {movie.budget}</div>
+                    <div><Badge pill bg="danger">revenue</Badge> $ {movie.revenue}</div>
+                    <div><Badge pill bg="danger">release date</Badge> {movie.release_date}</div>
+                    <div><Badge pill bg="danger">runtime</Badge> {movie.runtime} minutes</div>
                 </div>
             </Col>
         </Row>
